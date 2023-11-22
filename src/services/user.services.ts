@@ -20,3 +20,13 @@ export const GetAllUserFromBD = async (): Promise<IUser[]> => {
     return result;
 }
 
+/**
+ * get single user from DB using userId
+ * @param id userId
+ * @returns promise all user data
+ */
+export const GetSingleUserFromBD = async (id: number): Promise<IUser | null> => {
+    const result = await UserModel.findOne({ userId: id });
+    return result;
+}
+
