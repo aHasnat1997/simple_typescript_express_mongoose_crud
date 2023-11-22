@@ -11,3 +11,12 @@ export const CerateUserIntoBD = async (data: IUser): Promise<IUser> => {
     return result;
 }
 
+/**
+ * get all user from DB
+ * @returns promise all user data
+ */
+export const GetAllUserFromBD = async (): Promise<IUser[]> => {
+    const result = await UserModel.find();
+    return result;
+}
+
