@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { CreateUser, GetAllUser, GetSingleUser } from "../controllers/user.controllers";
+import { CreateUser, GetAllUser, GetSingleUser, UpdateSingleUser } from "../controllers/user.controllers";
 
 // user route created
 export const UserRoute = Router();
@@ -12,3 +12,6 @@ UserRoute.get('/', GetAllUser);
 
 // get single user route
 UserRoute.get('/:userId', GetSingleUser);
+
+// update user route
+UserRoute.put('/:userId', UpdateSingleUser)

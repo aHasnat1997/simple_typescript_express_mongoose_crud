@@ -30,3 +30,13 @@ export const GetSingleUserFromBD = async (id: number): Promise<IUser | null> => 
     return result;
 }
 
+/**
+ * update single user in DB using userId
+ * @param id userId
+ * @returns promise all user data
+ */
+export const updateSingleUserIntoBD = async (id: number, data: IUser): Promise<IUser | null> => {
+    const result = await UserModel.findOneAndUpdate({ userId: id }, data, { runValidators: true });
+    return result;
+}
+
