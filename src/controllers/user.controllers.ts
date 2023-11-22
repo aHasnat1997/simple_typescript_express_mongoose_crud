@@ -7,7 +7,7 @@ import { CerateUserIntoBD } from '../services/user.services';
  * @param req request obj
  * @param res api response
  */
-export const createUser = async (req: Request, res: Response): Promise<void> => {
+export const CreateUser = async (req: Request, res: Response): Promise<void> => {
     try {
         const userData = req.body;
         const result = await CerateUserIntoBD(userData);

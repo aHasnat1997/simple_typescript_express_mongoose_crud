@@ -22,7 +22,7 @@ const userAddressSchema = new Schema<IUserAddress>({
  * user schema
  */
 const userSchema = new Schema<IUser>({
-    userId: { type: Number, required: true },
+    userId: { type: Number, required: true, unique: true },
     username: { type: String, required: true },
     password: { type: String, required: true },
     fullName: { type: userNameSchema, required: true },
