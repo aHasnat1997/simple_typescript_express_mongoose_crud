@@ -27,5 +27,6 @@ export interface IUser {
     email: string,
     isActive: boolean,
     hobbies: string[],
-    address: IUserAddress
+    address: IUserAddress,
+    isDelete?: boolean
 }

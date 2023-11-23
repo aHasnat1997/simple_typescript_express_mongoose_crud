@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { CreateUser, GetAllUser, GetSingleUser, UpdateSingleUser } from "../controllers/user.controllers";
+import { CreateUser, DeleteSingleUser, GetAllUser, GetSingleUser, UpdateSingleUser } from "../controllers/user.controllers";
 
 // user route created
 export const UserRoute = Router();
@@ -14,4 +14,7 @@ UserRoute.get('/', GetAllUser);
 UserRoute.get('/:userId', GetSingleUser);
 
 // update user route
-UserRoute.put('/:userId', UpdateSingleUser)
+UserRoute.put('/:userId', UpdateSingleUser);
+
+// delete user route
+UserRoute.delete('/:userId', DeleteSingleUser);

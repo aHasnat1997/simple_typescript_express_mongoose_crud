@@ -31,6 +31,7 @@ const UserSchema = new Schema<IUser>({
     isActive: { type: Boolean, required: true, default: true },
     hobbies: { type: [String], required: true },
     address: { type: UserAddressSchema, required: true },
+    isDelete: { type: Boolean, default: false }
 });
 
 /**
@@ -44,8 +45,33 @@ UserSchema.methods.toJSON = function () {
     delete userData.fullName._id;
     delete userData.address._id;
     delete userData.__v;
+    delete userData.isDelete;
     return userData;
 };
+
+/**
+ * find all user but not deleted user
+ */
+UserSchema.pre('find', function (next) {
+    this.find({ isDelete: { $ne: true } });
+    next();
+});
+
+/**
+ * find all user but not deleted user
+ */
+UserSchema.pre('findOne', function (next) {
+    this.find({ isDelete: { $ne: true } });
+    next();
+});
+
+/**
+ * find all user but not deleted user
+ */
+UserSchema.pre('findOneAndUpdate', function (next) {
+    this.find({ isDelete: { $ne: true } });
+    next();
+});
 
 /**
  * user model
