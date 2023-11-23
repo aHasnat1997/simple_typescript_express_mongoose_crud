@@ -17,6 +17,5 @@ export const UserValidationSchema = z.object({
         street: z.string(),
         city: z.string(),
         country: z.string()
-    }),
-    isDelete: z.optional(z.boolean())
+    })
 });

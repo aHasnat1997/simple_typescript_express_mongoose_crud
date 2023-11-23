@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
-import { CerateUserIntoBD, DeleteSingleUserIntoBD, GetAllUserFromBD, GetSingleUserFromBD, UpdateSingleUserIntoBD } from '../services/user.services';
+import { CerateUserIntoDB, DeleteSingleUserIntoDB, GetAllUserFromDB, GetSingleUserFromDB, UpdateSingleUserIntoDB } from '../services/user.services';
 import { UserValidationSchema } from '../validations/user.validation';
 
 /**
@@ -12,7 +12,7 @@ export const CreateUser = async (req: Request, res: Response): Promise<void> => 
     try {
         const userData = req.body;
         const userValidData = UserValidationSchema.parse(userData);
-        const result = await CerateUserIntoBD(userValidData);
+        const result = await CerateUserIntoDB(userValidData);
         res.status(200).json({
             success: true,
             message: 'User created successfully 👍',
@@ -38,7 +38,7 @@ export const CreateUser = async (req: Request, res: Response): Promise<void> => 
  */
 export const GetAllUser = async (req: Request, res: Response): Promise<void> => {
     try {
-        const result = await GetAllUserFromBD();
+        const result = await GetAllUserFromDB();
         res.status(200).json({
             success: true,
             message: 'Users fetched successfully 👍',
@@ -66,7 +66,7 @@ export const GetAllUser = async (req: Request, res: Response): Promise<void> => 
 export const GetSingleUser = async (req: Request, res: Response): Promise<void> => {
     try {
         const id = parseInt(req.params.userId);
-        const result = await GetSingleUserFromBD(id);
+        const result = await GetSingleUserFromDB(id);
         if (result === null) {
             res.status(404).json({
                 success: false,
@@ -102,7 +102,7 @@ export const UpdateSingleUser = async (req: Request, res: Response): Promise<voi
     try {
         const id = parseInt(req.params.userId);
         const data = req.body;
-        const result = await UpdateSingleUserIntoBD(id, data);
+        const result = await UpdateSingleUserIntoDB(id, data);
         if (result === null) {
             res.status(404).json({
                 success: false,
@@ -137,7 +137,7 @@ export const UpdateSingleUser = async (req: Request, res: Response): Promise<voi
 export const DeleteSingleUser = async (req: Request, res: Response): Promise<void> => {
     try {
         const id = parseInt(req.params.userId);
-        const result = await DeleteSingleUserIntoBD(id);
+        const result = await DeleteSingleUserIntoDB(id);
         res.status(200).json({
             success: true,
             message: 'Users delete successfully 👍',

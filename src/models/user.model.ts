@@ -7,32 +7,32 @@ import config from "../config";
  * user name schema
  */
 const UserNameSchema = new Schema<IUserName>({
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true }
+    firstName: { type: String, required: [true, 'first name is required'], trim: true },
+    lastName: { type: String, required: [true, 'last name is required'], trim: true }
 });
 
 /**
  * user address schema
  */
 const UserAddressSchema = new Schema<IUserAddress>({
-    street: { type: String, required: true },
-    city: { type: String, required: true },
-    country: { type: String, required: true }
+    street: { type: String, required: [true, 'street is required'], trim: true },
+    city: { type: String, required: [true, 'city is required'], trim: true },
+    country: { type: String, required: [true, 'country is required'] }
 });
 
 /**
  * user schema
  */
 const UserSchema = new Schema<IUser>({
-    userId: { type: Number, required: true, unique: true },
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    fullName: { type: UserNameSchema, required: true },
-    age: { type: Number, required: true },
-    email: { type: String, required: true, unique: true },
-    isActive: { type: Boolean, required: true, default: true },
-    hobbies: { type: [String], required: true },
-    address: { type: UserAddressSchema, required: true },
+    userId: { type: Number, required: [true, 'userId is required'], trim: true, unique: true },
+    username: { type: String, required: [true, 'username is required'], trim: true, unique: true },
+    password: { type: String, required: [true, 'password is required'], trim: true },
+    fullName: { type: UserNameSchema, required: [true, 'fullName is required'], trim: true },
+    age: { type: Number, required: [true, 'age is required'], trim: true },
+    email: { type: String, required: [true, 'email is required'], trim: true, unique: true },
+    isActive: { type: Boolean, required: true, trim: true, default: true },
+    hobbies: { type: [String], required: [true, 'hobbies is required'], trim: true },
+    address: { type: UserAddressSchema, required: [true, 'address is required'], trim: true },
     isDelete: { type: Boolean, default: false }
 });
 
