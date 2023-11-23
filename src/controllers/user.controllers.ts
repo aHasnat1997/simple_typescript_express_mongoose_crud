@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { CerateUserIntoBD, GetAllUserFromBD, GetSingleUserFromBD, updateSingleUserIntoBD } from '../services/user.services';
+import { UserValidationSchema } from '../validations/user.validation';
 
 /**
  * create a user in DB
@@ -10,7 +11,8 @@ import { CerateUserIntoBD, GetAllUserFromBD, GetSingleUserFromBD, updateSingleUs
 export const CreateUser = async (req: Request, res: Response): Promise<void> => {
     try {
         const userData = req.body;
-        const result = await CerateUserIntoBD(userData);
+        const userValidData = UserValidationSchema.parse(userData);
+        const result = await CerateUserIntoBD(userValidData);
         res.status(200).json({
             success: true,
             message: 'User created successfully 👍',
