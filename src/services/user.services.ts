@@ -16,7 +16,16 @@ export const CerateUserIntoBD = async (data: IUser): Promise<IUser> => {
  * @returns promise all user data
  */
 export const GetAllUserFromBD = async (): Promise<IUser[]> => {
-    const result = await UserModel.find();
+    const result = await UserModel.aggregate([
+        {
+            $project: {
+                _id: 0,
+                password: 0,
+                "fullName._id": 0,
+                "__v": 0
+            }
+        }
+    ]);
     return result;
 }
 
@@ -26,8 +35,18 @@ export const GetAllUserFromBD = async (): Promise<IUser[]> => {
  * @returns promise all user data
  */
 export const GetSingleUserFromBD = async (id: number): Promise<IUser | null> => {
-    const result = await UserModel.findOne({ userId: id });
-    return result;
+    const result = await UserModel.aggregate([
+        { $match: { userId: id } },
+        {
+            $project: {
+                _id: 0,
+                password: 0,
+                "fullName._id": 0,
+                "__v": 0
+            }
+        }
+    ]);
+    return result[0];
 }
 
 /**
@@ -36,7 +55,6 @@ export const GetSingleUserFromBD = async (id: number): Promise<IUser | null> => 
  * @returns promise all user data
  */
 export const updateSingleUserIntoBD = async (id: number, data: IUser): Promise<IUser | null> => {
-    const result = await UserModel.findOneAndUpdate({ userId: id }, data, { runValidators: true });
+    const result = await UserModel.findOneAndUpdate({ userId: id }, data, { runValidators: true, new: true });
     return result;
 }
-

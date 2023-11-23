@@ -40,6 +40,7 @@ export const GetAllUser = async (req: Request, res: Response): Promise<void> => 
         res.status(200).json({
             success: true,
             message: 'Users fetched successfully 👍',
+            totalUser: result.length,
             data: result
         })
     } catch (error: any) {

@@ -4,7 +4,7 @@ import { IUser, IUserAddress, IUserName } from "../interfaces/user.interface";
 /**
  * user name schema
  */
-const userNameSchema = new Schema<IUserName>({
+const UserNameSchema = new Schema<IUserName>({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true }
 });
@@ -12,7 +12,7 @@ const userNameSchema = new Schema<IUserName>({
 /**
  * user address schema
  */
-const userAddressSchema = new Schema<IUserAddress>({
+const UserAddressSchema = new Schema<IUserAddress>({
     street: { type: String, required: true },
     city: { type: String, required: true },
     country: { type: String, required: true }
@@ -21,19 +21,19 @@ const userAddressSchema = new Schema<IUserAddress>({
 /**
  * user schema
  */
-const userSchema = new Schema<IUser>({
+const UserSchema = new Schema<IUser>({
     userId: { type: Number, required: true, unique: true },
-    username: { type: String, required: true },
+    username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    fullName: { type: userNameSchema, required: true },
+    fullName: { type: UserNameSchema, required: true },
     age: { type: Number, required: true },
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
     isActive: { type: Boolean, required: true },
     hobbies: { type: [String], required: true },
-    address: { type: userAddressSchema, required: true },
+    address: { type: UserAddressSchema, required: true },
 });
 
 /**
  * user model
  */
-export const UserModel = model<IUser>('user', userSchema);
+export const UserModel = model<IUser>('user', UserSchema);
