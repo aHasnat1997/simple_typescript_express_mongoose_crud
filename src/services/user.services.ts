@@ -9,7 +9,7 @@ import { UserModel } from "../models/user.model";
 export const CerateUserIntoBD = async (data: IUser): Promise<IUser> => {
     const result = await UserModel.create(data);
     return result;
-}
+};
 
 /**
  * get all user from DB
@@ -18,7 +18,7 @@ export const CerateUserIntoBD = async (data: IUser): Promise<IUser> => {
 export const GetAllUserFromBD = async (): Promise<IUser[]> => {
     const result = await UserModel.find().select('-userId -isActive -hobbies');
     return result;
-}
+};
 
 /**
  * get single user from DB using userId
@@ -28,7 +28,7 @@ export const GetAllUserFromBD = async (): Promise<IUser[]> => {
 export const GetSingleUserFromBD = async (id: number): Promise<IUser | null> => {
     const result = await UserModel.findOne({ userId: id });
     return result;
-}
+};
 
 /**
  * update single user in DB using userId
@@ -39,7 +39,7 @@ export const GetSingleUserFromBD = async (id: number): Promise<IUser | null> => 
 export const UpdateSingleUserIntoBD = async (id: number, data: IUser): Promise<IUser | null> => {
     const result = await UserModel.findOneAndUpdate({ userId: id }, data, { runValidators: true, new: true });
     return result;
-}
+};
 
 /**
  * delete single user in DB using userId
@@ -49,4 +49,4 @@ export const UpdateSingleUserIntoBD = async (id: number, data: IUser): Promise<I
 export const DeleteSingleUserIntoBD = async (id: number): Promise<null> => {
     await UserModel.findOneAndUpdate({ userId: id }, { isDelete: true }, { new: true });
     return null;
-}
+};

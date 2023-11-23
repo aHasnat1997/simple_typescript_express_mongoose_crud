@@ -147,7 +147,7 @@ export const DeleteSingleUser = async (req: Request, res: Response): Promise<voi
         console.log(`error=====================>${error}<=====================error`);
         res.status(404).json({
             success: false,
-            message: 'User not update ✖️',
+            message: 'User not delete ✖️',
             error: {
                 code: 404,
                 description: error.message

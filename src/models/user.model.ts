@@ -1,5 +1,7 @@
 import { Schema, model } from "mongoose";
 import { IUser, IUserAddress, IUserName } from "../interfaces/user.interface";
+import bcrypt from 'bcrypt';
+import config from "../config";
 
 /**
  * user name schema
@@ -58,7 +60,7 @@ UserSchema.pre('find', function (next) {
 });
 
 /**
- * find all user but not deleted user
+ * find single user but not deleted user
  */
 UserSchema.pre('findOne', function (next) {
     this.find({ isDelete: { $ne: true } });
@@ -66,10 +68,18 @@ UserSchema.pre('findOne', function (next) {
 });
 
 /**
- * find all user but not deleted user
+ * update single user but not deleted user
  */
 UserSchema.pre('findOneAndUpdate', function (next) {
     this.find({ isDelete: { $ne: true } });
+    next();
+});
+
+/**
+ * hash password before save in DB
+ */
+UserSchema.pre('save', async function (next) {
+    this.password = await bcrypt.hash(this.password, Number(config.bcrypt_salt))
     next();
 });
 
