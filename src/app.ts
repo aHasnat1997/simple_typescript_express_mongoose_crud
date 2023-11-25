@@ -16,6 +16,6 @@ app.use('/api/users', UserRoute)
 // home route
 app.get('/', (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, '../view/index.html'));
-})
+});
 
 export default app;
