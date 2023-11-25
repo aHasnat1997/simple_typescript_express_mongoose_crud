@@ -5,8 +5,12 @@ import config from "./config";
 (async function server() {
     try {
         // DB connection
-        await mongoose.connect(config.databaseURL as string);
-        console.log('Connected to DB 🔌');
+        await mongoose
+            .connect(config.databaseURL as string, {
+                autoIndex: true,
+            })
+            .then(() => console.log('Connected to DB 🔌'))
+            .catch((error) => console.log(error.message))
 
         // server listening
         app.listen(config.port, () => {

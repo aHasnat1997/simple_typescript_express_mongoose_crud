@@ -6,7 +6,7 @@ import { UserModel } from "../models/user.model";
  * @param data user json data
  * @returns promise user created data
  */
-export const CerateUserIntoBD = async (data: IUser): Promise<IUser> => {
+export const CerateUserIntoDB = async (data: IUser): Promise<IUser> => {
     const result = await UserModel.create(data);
     return result;
 };
@@ -15,7 +15,7 @@ export const CerateUserIntoBD = async (data: IUser): Promise<IUser> => {
  * get all user from DB
  * @returns promise all user data
  */
-export const GetAllUserFromBD = async (): Promise<IUser[]> => {
+export const GetAllUserFromDB = async (): Promise<IUser[]> => {
     const result = await UserModel.find().select('-userId -isActive -hobbies');
     return result;
 };
@@ -25,7 +25,7 @@ export const GetAllUserFromBD = async (): Promise<IUser[]> => {
  * @param id userId
  * @returns promise all user data
  */
-export const GetSingleUserFromBD = async (id: number): Promise<IUser | null> => {
+export const GetSingleUserFromDB = async (id: number): Promise<IUser | null> => {
     const result = await UserModel.findOne({ userId: id });
     return result;
 };
@@ -36,7 +36,7 @@ export const GetSingleUserFromBD = async (id: number): Promise<IUser | null> => 
  * @param data user update data
  * @returns promise all user data
  */
-export const UpdateSingleUserIntoBD = async (id: number, data: IUser): Promise<IUser | null> => {
+export const UpdateSingleUserIntoDB = async (id: number, data: IUser): Promise<IUser | null> => {
     const result = await UserModel.findOneAndUpdate({ userId: id }, data, { runValidators: true, new: true });
     return result;
 };
@@ -46,7 +46,7 @@ export const UpdateSingleUserIntoBD = async (id: number, data: IUser): Promise<I
  * @param id userId
  * @returns promise all user data
  */
-export const DeleteSingleUserIntoBD = async (id: number): Promise<null> => {
+export const DeleteSingleUserIntoDB = async (id: number): Promise<IUser | null> => {
     await UserModel.findOneAndUpdate({ userId: id }, { isDelete: true }, { new: true });
     return null;
 };
