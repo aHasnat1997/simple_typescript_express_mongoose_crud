@@ -5,11 +5,28 @@ import { IOrderObj } from "../interfaces/order.interface";
  * orders object schema
  */
 const OrdersObjSchema = new Schema<IOrderObj>({
-    userId: { type: Number, required: [true, 'product is required'], trim: true },
+    userId: {
+        type: Number,
+        required: [true, 'product is required'],
+        trim: true
+    },
     order: {
-        productName: { type: String, required: [true, 'product is required'], trim: true },
-        price: { type: Number, required: [true, 'product is required'], trim: true },
-        quantity: { type: Number, required: [true, 'product is required'], default: 0, trim: true }
+        productName: {
+            type: String,
+            required: [true, 'product is required'],
+            trim: true
+        },
+        price: {
+            type: Number,
+            required: [true, 'product is required'],
+            trim: true
+        },
+        quantity: {
+            type: Number,
+            required: [true, 'product is required'],
+            default: 0,
+            trim: true
+        }
     }
 });
 

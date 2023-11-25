@@ -24,16 +24,56 @@ const UserAddressSchema = new Schema<IUserAddress>({
  * user schema
  */
 const UserSchema = new Schema<IUser>({
-    userId: { type: Number, required: [true, 'userId is required'], trim: true, unique: true },
-    username: { type: String, required: [true, 'username is required'], trim: true, unique: true },
-    password: { type: String, required: [true, 'password is required'], trim: true },
-    fullName: { type: UserNameSchema, required: [true, 'fullName is required'], trim: true },
-    age: { type: Number, required: [true, 'age is required'], trim: true },
-    email: { type: String, required: [true, 'email is required'], trim: true, unique: true },
-    isActive: { type: Boolean, required: true, trim: true, default: true },
-    hobbies: { type: [String], required: [true, 'hobbies is required'], trim: true },
-    address: { type: UserAddressSchema, required: [true, 'address is required'], trim: true },
-    isDelete: { type: Boolean, default: false }
+    userId: {
+        type: Number,
+        required: [true, 'userId is required'],
+        trim: true,
+        unique: true
+    },
+    username: {
+        type: String,
+        required: [true, 'username is required'],
+        trim: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: [true, 'password is required'],
+        trim: true
+    },
+    fullName: {
+        type: UserNameSchema,
+        required: [true, 'fullName is required'],
+        trim: true
+    },
+    age: {
+        type: Number,
+        required: [true, 'age is required'],
+        trim: true
+    },
+    email: {
+        type: String,
+        required: [true, 'email is required'],
+        trim: true,
+        unique: true
+    },
+    isActive: {
+        type: Boolean,
+        required: true,
+        trim: true,
+        default: true
+    },
+    hobbies: {
+        type: [String],
+        required: [true, 'hobbies is required'],
+        trim: true
+    },
+    address: {
+        type: UserAddressSchema,
+        required: [true, 'address is required'],
+        trim: true
+    },
+    isDelete: { type: Boolean, default: false },
 });
 
 /**
