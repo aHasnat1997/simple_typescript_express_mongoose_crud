@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from "express";
-import { CerateOrderIntoDB, GetOrderFromDB } from "../services/order.services";
+import { CerateOrderIntoDB, GetOrderFromDB, GetTotalPriceFromDB } from "../services/order.services";
 
 
 /**
@@ -41,24 +41,63 @@ export const GetOrder = async (req: Request, res: Response): Promise<void> => {
     try {
         const userId = Number(req.params.userId)
         const result = await GetOrderFromDB(userId);
-        if (result === null) {
+        if (result.length === 0) {
             res.status(200).json({
                 success: true,
                 message: 'Order fetched successfully 👍',
                 data: 'No order found'
             })
-        } else {
+        }
+        else {
             res.status(200).json({
                 success: true,
                 message: 'Order fetched successfully 👍',
-                data: result
+                data: result.map(data => data.order)
             })
         }
     } catch (error: any) {
         console.log(`error=====================>${error}<=====================error`);
         res.status(400).json({
             success: false,
-            message: 'Order is not created ✖️',
+            message: 'Order not fetched ✖️',
+            error: {
+                code: 400,
+                description: error.message
+            }
+        });
+    }
+};
+
+/**
+ * get user order total price from DB
+ * @param req request obj
+ * @param res api response
+ */
+export const GetTotalPrice = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const userId = Number(req.params.userId)
+        const result = await GetTotalPriceFromDB(userId);
+        if (result) {
+            res.status(200).json({
+                success: true,
+                message: 'Total price calculated successfully 👍',
+                data: result
+            })
+        }
+        else {
+            res.status(200).json({
+                success: true,
+                message: 'Total price calculated successfully 👍',
+                data: {
+                    totalPrice: 0
+                }
+            })
+        }
+    } catch (error: any) {
+        console.log(`error=====================>${error}<=====================error`);
+        res.status(400).json({
+            success: false,
+            message: 'Total price calculated not ✖️',
             error: {
                 code: 400,
                 description: error.message
